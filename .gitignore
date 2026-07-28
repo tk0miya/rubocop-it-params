@@ -1,4 +1,11 @@
+# NOTE: Entries are sorted in ASCII order.
+
+# rspec failure tracking
+.rspec_status
+
 /.bundle/
+/.claude/settings.local.json
+/.gem_rbs_collection/
 /.yardoc
 /_yardoc/
 /coverage/
@@ -6,6 +13,3 @@
 /pkg/
 /spec/reports/
 /tmp/
-
-# rspec failure tracking
-.rspec_status

@@ -1,8 +1,10 @@
+# Generated from lib/rubocop/it/params.rb with RBS::Inline
+
 module Rubocop
   module It
     module Params
-      VERSION: String
-      # See the writing guide of rbs: https://github.com/ruby/rbs#guides
+      class Error < StandardError
+      end
     end
   end
 end
