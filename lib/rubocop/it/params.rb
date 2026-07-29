@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
-require_relative "params/version"
+require "rubocop"
 
-module Rubocop
-  module It
-    module Params
-      class Error < StandardError; end
-      # Your code goes here...
-    end
-  end
-end
+require_relative "params/version"
+require_relative "params/plugin"
+require_relative "../cop/style/prefer_it_parameter"

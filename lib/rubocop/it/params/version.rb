@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Rubocop
+module RuboCop
   module It
     module Params
       VERSION = "0.1.0"

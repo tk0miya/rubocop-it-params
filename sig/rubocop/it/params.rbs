@@ -1,10 +1,2 @@
 # Generated from lib/rubocop/it/params.rb with RBS::Inline
 
-module Rubocop
-  module It
-    module Params
-      class Error < StandardError
-      end
-    end
-  end
-end

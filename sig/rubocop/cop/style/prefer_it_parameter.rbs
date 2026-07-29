@@ -1,0 +1,148 @@
+# Generated from lib/rubocop/cop/style/prefer_it_parameter.rb with RBS::Inline
+
+module RuboCop
+  module Cop
+    module Style
+      # Prefer the `it` block parameter over a named block argument in single-line blocks.
+      #
+      # Only blocks consisting of a single statement are converted. This cop complements
+      # `Style/ItBlockParameter` in RuboCop core, which converts `_1` to `it` but in its
+      # default style does not check named block arguments.
+      #
+      # @safety
+      #   The autocorrection is unsafe because a local variable named `it` that the
+      #   block does not reference cannot be detected, and replacing it would silently
+      #   change what the block sees. Enabling `Style/ItAssignment` rules such names
+      #   out. Additionally, `it` drops the argument name from `Proc#parameters`
+      #   (`[[:opt, :x]]` becomes `[[:opt]]`) and breaks
+      #   `binding.local_variable_get(:x)` inside the block. Blocks that define a
+      #   callable or a method are skipped for that reason, but a block captured with
+      #   `&block` and introspected elsewhere is still affected.
+      #
+      # @example
+      #   # bad
+      #   users.map { |user| user.name.upcase }
+      #   items.select { |item| item.active? && item.visible? }
+      #
+      #   # good
+      #   users.map { it.name.upcase }
+      #   items.select { it.active? && it.visible? }
+      #
+      #   # good - multi-line block
+      #   users.each do |user|
+      #     user.activate!
+      #     notify(user)
+      #   end
+      #
+      #   # good - the block consists of two statements
+      #   items.each { |item| validate(item); save(item) }
+      #
+      #   # good - only the innermost block may use `it`
+      #   matrix.map { |row| row.map { it * 2 } }
+      #
+      #   # good - `|x,|` destructures the yielded value, unlike `it`
+      #   pairs.each { |pair,| puts pair }
+      #
+      #   # good - a callable's parameter list is part of its API
+      #   ->(x) { puts x }
+      #   define_method(:m) { |x| x + 1 }
+      #
+      #   # bad
+      #   items.map { |item| {item:} }
+      #
+      #   # good - the value is spelled out, since `{it:}` would call a method named `it`
+      #   items.map { {item: it} }
+      class PreferItParameter < Base
+        extend AutoCorrector
+
+        extend TargetRubyVersion
+
+        include RangeHelp
+
+        MSG: ::String
+
+        INNER_BLOCK_TYPES: Array[Symbol]
+
+        CALLABLE_METHODS: Array[Symbol]
+
+        # @rbs node: RuboCop::AST::BlockNode
+        def on_block: (RuboCop::AST::BlockNode node) -> void
+
+        private
+
+        # @rbs node: RuboCop::AST::BlockNode
+        # @rbs body: RuboCop::AST::Node
+        def convertible_argument_name: (RuboCop::AST::BlockNode node, RuboCop::AST::Node body) -> Symbol?
+
+        # `it` would not mean what the block expects when a local variable named `it`
+        # is already in scope, or when the body assigns to `it` — assigning turns `it`
+        # into a plain local variable and disables the implicit block parameter.
+        #
+        # @rbs body: RuboCop::AST::Node
+        def shadows_it?: (RuboCop::AST::Node body) -> bool
+
+        # `it` drops the parameter name from `Proc#parameters`, which changes the
+        # meaning of a block that defines a callable object or a method: there the
+        # parameter list is part of the API, unlike a block passed to `each` or `map`.
+        #
+        # @rbs node: RuboCop::AST::BlockNode
+        def defines_callable?: (RuboCop::AST::BlockNode node) -> bool
+
+        # @rbs node: RuboCop::AST::BlockNode
+        def proc_new?: (RuboCop::AST::BlockNode node) -> bool
+
+        # @rbs node: RuboCop::AST::BlockNode
+        def sole_argument_name: (RuboCop::AST::BlockNode node) -> Symbol?
+
+        # @rbs body: RuboCop::AST::Node
+        # @rbs name: Symbol
+        def convertible_body?: (RuboCop::AST::Node body, Symbol name) -> bool
+
+        # `begin` (parentheses) and `kwbegin` (`begin ... end`) both wrap a sequence of
+        # statements as well as a single expression, so the number of children is what
+        # tells the two apart.
+        #
+        # @rbs body: RuboCop::AST::Node
+        def single_statement?: (RuboCop::AST::Node body) -> bool
+
+        # `it` is a syntax error inside a block that has an ordinary parameter, and
+        # silently shadows the outer one inside a parameterless block, so only the
+        # innermost block is converted.
+        #
+        # @rbs body: RuboCop::AST::Node
+        def contains_block?: (RuboCop::AST::Node body) -> bool
+
+        # A block that rebinds the name cannot be converted: the value `it` refers to
+        # would no longer be the one the block was yielded. `match_var` covers pattern
+        # matching (`1 in x`), which rebinds just like an assignment.
+        #
+        # @rbs body: RuboCop::AST::Node
+        # @rbs name: Symbol
+        def reassigned?: (RuboCop::AST::Node body, Symbol name) -> bool
+
+        # Returns the enclosing pair when the reference is a value omission (`{x:}`,
+        # `foo(x:)`). Such a reference shares its source range with the label, so the
+        # value has to be written after the pair rather than replaced.
+        #
+        # @rbs reference: RuboCop::AST::Node
+        def omitted_value_pair: (RuboCop::AST::Node reference) -> RuboCop::AST::PairNode?
+
+        # @rbs body: RuboCop::AST::Node
+        # @rbs name: Symbol
+        def lvar_references: (RuboCop::AST::Node body, Symbol name) -> Array[RuboCop::AST::Node]
+
+        # @rbs node: RuboCop::AST::BlockNode
+        # @rbs name: Symbol
+        # @rbs references: Array[RuboCop::AST::Node]
+        def register_offense: (RuboCop::AST::BlockNode node, Symbol name, Array[RuboCop::AST::Node] references) -> void
+
+        # @rbs corrector: RuboCop::Cop::Corrector
+        # @rbs reference: RuboCop::AST::Node
+        def replace_reference: (RuboCop::Cop::Corrector corrector, RuboCop::AST::Node reference) -> void
+
+        # @rbs node: RuboCop::AST::BlockNode
+        def arguments_removal_range: (RuboCop::AST::BlockNode node) -> Parser::Source::Range
+      end
+    end
+  end
+end
