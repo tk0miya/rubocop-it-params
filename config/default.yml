@@ -1,0 +1,5 @@
+Style/PreferItParameter:
+  Description: 'Prefer the `it` block parameter over a named block argument in single-line blocks.'
+  Enabled: true
+  SafeAutoCorrect: false
+  VersionAdded: '0.1'
