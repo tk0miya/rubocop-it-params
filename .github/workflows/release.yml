@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - 'lib/rubocop/it/params/version.rb'
+      - 'lib/rubocop/prefer_it_parameter/version.rb'
   workflow_dispatch:
 
 jobs:

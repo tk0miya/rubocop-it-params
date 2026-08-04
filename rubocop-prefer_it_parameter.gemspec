@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
-require_relative "lib/rubocop/it/params/version"
+require_relative "lib/rubocop/prefer_it_parameter/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "rubocop-it-params"
-  spec.version = RuboCop::It::Params::VERSION
+  spec.name = "rubocop-prefer_it_parameter"
+  spec.version = RuboCop::PreferItParameter::VERSION
   spec.authors = ["Takeshi KOMIYA"]
   spec.email = ["i.tkomiya@gmail.com"]
 
   spec.summary = "A RuboCop plugin that recommends using the `it` block parameter."
   spec.description = "A RuboCop plugin that recommends using the `it` block parameter " \
                      "instead of named block arguments in single-line blocks."
-  spec.homepage = "https://github.com/tk0miya/rubocop-it-params"
+  spec.homepage = "https://github.com/tk0miya/rubocop-prefer_it_parameter"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.4"
-  spec.metadata["default_lint_roller_plugin"] = "RuboCop::It::Params::Plugin"
+  spec.metadata["default_lint_roller_plugin"] = "RuboCop::PreferItParameter::Plugin"
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/tk0miya/rubocop-it-params"
-  spec.metadata["changelog_uri"] = "https://github.com/tk0miya/rubocop-it-params/blob/main/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/tk0miya/rubocop-prefer_it_parameter"
+  spec.metadata["changelog_uri"] = "https://github.com/tk0miya/rubocop-prefer_it_parameter/blob/main/CHANGELOG.md"
 
   # Requiring MFA for gem pushes helps protect your gem from supply chain
   # attacks by ensuring no one can publish a new version without

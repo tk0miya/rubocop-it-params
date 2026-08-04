@@ -1,4 +1,4 @@
-# rubocop-it-params
+# rubocop-prefer_it_parameter
 
 A RuboCop plugin that recommends using the `it` block parameter (Ruby 3.4+) instead of named block arguments in single-line blocks.
 
@@ -8,21 +8,21 @@ Add the gem to your application's Gemfile. RuboCop loads it through `plugins:`, 
 
 ```ruby
 group :development do
-  gem "rubocop-it-params", require: false
+  gem "rubocop-prefer_it_parameter", require: false
 end
 ```
 
 Or install it directly:
 
 ```bash
-gem install rubocop-it-params
+gem install rubocop-prefer_it_parameter
 ```
 
 Then add it to your `.rubocop.yml`:
 
 ```yaml
 plugins:
-  - rubocop-it-params
+  - rubocop-prefer_it_parameter
 ```
 
 ## Cops
@@ -121,7 +121,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/tk0miya/rubocop-it-params. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/tk0miya/rubocop-it-params/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/tk0miya/rubocop-prefer_it_parameter. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/tk0miya/rubocop-prefer_it_parameter/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -129,4 +129,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the rubocop-it-params project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/tk0miya/rubocop-it-params/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the rubocop-prefer_it_parameter project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/tk0miya/rubocop-prefer_it_parameter/blob/main/CODE_OF_CONDUCT.md).

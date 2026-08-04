@@ -1,9 +1,0 @@
-# Generated from lib/rubocop/it/params/version.rb with RBS::Inline
-
-module RuboCop
-  module It
-    module Params
-      VERSION: ::String
-    end
-  end
-end
