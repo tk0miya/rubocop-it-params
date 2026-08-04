@@ -150,6 +150,14 @@ RSpec.describe RuboCop::Cop::Style::PreferItParameter, :config do
         end
       end
 
+      context "with the `lambda` method on an explicit receiver" do
+        it "does not register an offense" do
+          expect_no_offenses(<<~RUBY)
+            Kernel.lambda { |x| x.foo }
+          RUBY
+        end
+      end
+
       context "with the `proc` method" do
         it "does not register an offense" do
           expect_no_offenses(<<~RUBY)
@@ -180,6 +188,14 @@ RSpec.describe RuboCop::Cop::Style::PreferItParameter, :config do
         it "does not register an offense" do
           expect_no_offenses(<<~RUBY)
             Proc.new { |x| x.foo }
+          RUBY
+        end
+      end
+
+      context "when the receiver is `::Proc`" do
+        it "does not register an offense" do
+          expect_no_offenses(<<~RUBY)
+            ::Proc.new { |x| x.foo }
           RUBY
         end
       end
@@ -385,11 +401,26 @@ RSpec.describe RuboCop::Cop::Style::PreferItParameter, :config do
           RUBY
         end
       end
+    end
 
-      context "with pattern matching" do
+    context "with pattern matching" do
+      context "when the pattern rebinds the argument" do
         it "does not register an offense" do
           expect_no_offenses(<<~RUBY)
             a.each { |x| puts x if 1 in x }
+          RUBY
+        end
+      end
+
+      context "when the pattern pins the argument" do
+        it "registers an offense and corrects" do
+          expect_offense(<<~RUBY)
+            ids.select { |id| record in {id: ^id} }
+                         ^^^^ Use the `it` block parameter instead of the named block argument `id`.
+          RUBY
+
+          expect_correction(<<~RUBY)
+            ids.select { record in {id: ^it} }
           RUBY
         end
       end
