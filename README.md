@@ -115,9 +115,13 @@ The cop only inspects projects whose `TargetRubyVersion` is 3.4 or higher, since
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `bundle exec rake` to run the whole check suite (RuboCop, RSpec, Steep and RBS validation), or `bundle exec rake spec` for the tests alone. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`.
+
+## Releasing
+
+Bump `VERSION` in `lib/rubocop/prefer_it_parameter/version.rb`, add an entry to [CHANGELOG.md](CHANGELOG.md), and merge that into `main`. The [release workflow](.github/workflows/release.yml) picks up the change to `version.rb`, tags the version, and pushes the gem to [rubygems.org](https://rubygems.org) through trusted publishing. It can also be started by hand from the Actions tab.
 
 ## Contributing
 

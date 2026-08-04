@@ -15,7 +15,6 @@ Gem::Specification.new do |spec|
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.4"
   spec.metadata["default_lint_roller_plugin"] = "RuboCop::PreferItParameter::Plugin"
-  spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/tk0miya/rubocop-prefer_it_parameter"
   spec.metadata["changelog_uri"] = "https://github.com/tk0miya/rubocop-prefer_it_parameter/blob/main/CHANGELOG.md"
 
@@ -39,13 +38,8 @@ Gem::Specification.new do |spec|
       (f == gemspec) || f.start_with?(*development_only)
     end
   end
-  spec.bindir = "exe"
-  spec.executables = spec.files.grep(%r{\Aexe/}) { File.basename(it) }
   spec.require_paths = ["lib"]
 
   spec.add_dependency "lint_roller", "~> 1.0"
   spec.add_dependency "rubocop", ">= 1.75.0"
-
-  # For more information and examples about making a new gem, check out our
-  # guide at: https://guides.rubygems.org/make-your-own-gem/
 end
