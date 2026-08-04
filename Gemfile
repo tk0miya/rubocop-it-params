@@ -2,7 +2,7 @@
 
 source "https://rubygems.org", cooldown: 7
 
-# Specify your gem's dependencies in rubocop-it-params.gemspec
+# Specify your gem's dependencies in rubocop-prefer_it_parameter.gemspec
 gemspec
 
 group :development do

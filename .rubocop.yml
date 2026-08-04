@@ -5,7 +5,7 @@ AllCops:
   TargetRubyVersion: 3.4
 
 plugins:
-  - rubocop-it-params
+  - rubocop-prefer_it_parameter
   - rubocop-rake
   - rubocop-rbs_inline
   - rubocop-rspec
@@ -36,7 +36,7 @@ Metrics/MethodLength:
 Naming/FileName:
   Exclude:
     # The plugin entry point has to match the gem name.
-    - "lib/rubocop-it-params.rb"
+    - "lib/rubocop-prefer_it_parameter.rb"
 
 # RSpec
 RSpec/ExampleLength:

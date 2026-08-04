@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "rubocop/it/params"
+require "rubocop/prefer_it_parameter"
 require "rubocop/rspec/support"
 
 RSpec.configure do |config|

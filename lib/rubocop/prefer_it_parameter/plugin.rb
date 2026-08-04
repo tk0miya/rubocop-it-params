@@ -12,9 +12,9 @@ module RuboCop
         # @rbs override
         def about
           LintRoller::About.new(
-            name: "rubocop-it-params",
+            name: "rubocop-prefer_it_parameter",
             version: VERSION,
-            homepage: "https://github.com/tk0miya/rubocop-it-params",
+            homepage: "https://github.com/tk0miya/rubocop-prefer_it_parameter",
             description: "A RuboCop plugin that recommends using the `it` block parameter " \
                          "instead of named block arguments in single-line blocks."
           )
@@ -31,7 +31,7 @@ module RuboCop
             type: :path,
             config_format: :rubocop,
             # `__dir__` is `String?` in the RBS stubs, so `__FILE__` is used instead.
-            value: Pathname.new(__FILE__).dirname.join("../../../../config/default.yml").expand_path
+            value: Pathname.new(__FILE__).dirname.join("../../../config/default.yml").expand_path
           )
         end
       end
