@@ -1,5 +1,6 @@
 Style/PreferItParameter:
   Description: 'Prefer the `it` block parameter over a named block argument in single-line blocks.'
+  Reference: https://github.com/tk0miya/rubocop-prefer_it_parameter#stylepreferitparameter
   Enabled: true
   SafeAutoCorrect: false
-  VersionAdded: '0.1'
+  VersionAdded: '1.0'
