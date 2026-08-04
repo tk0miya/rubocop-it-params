@@ -4,7 +4,7 @@ require_relative "lib/rubocop/prefer_it_parameter/version"
 
 Gem::Specification.new do |spec|
   spec.name = "rubocop-prefer_it_parameter"
-  spec.version = RuboCop::It::Params::VERSION
+  spec.version = RuboCop::PreferItParameter::VERSION
   spec.authors = ["Takeshi KOMIYA"]
   spec.email = ["i.tkomiya@gmail.com"]
 
@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.homepage = "https://github.com/tk0miya/rubocop-prefer_it_parameter"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.4"
-  spec.metadata["default_lint_roller_plugin"] = "RuboCop::It::Params::Plugin"
+  spec.metadata["default_lint_roller_plugin"] = "RuboCop::PreferItParameter::Plugin"
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/tk0miya/rubocop-prefer_it_parameter"
   spec.metadata["changelog_uri"] = "https://github.com/tk0miya/rubocop-prefer_it_parameter/blob/main/CHANGELOG.md"

@@ -2,7 +2,7 @@
 
 require "yaml"
 
-RSpec.describe RuboCop::It::Params::Plugin do
+RSpec.describe RuboCop::PreferItParameter::Plugin do
   let(:plugin) { described_class.new({}) }
 
   describe "#supported?" do
@@ -29,7 +29,7 @@ RSpec.describe RuboCop::It::Params::Plugin do
 
       # Scoped to `lib/` so that gems vendored under the repository (for example via
       # `bundle config path vendor/bundle`) are not mistaken for this gem's own cops.
-      lib_root = File.expand_path("../../../../lib", __dir__)
+      lib_root = File.expand_path("../../../lib", __dir__)
       defined_here = RuboCop::Cop::Registry.global.cops.select do |cop|
         Object.const_source_location(cop.name)&.first&.start_with?("#{lib_root}/")
       end

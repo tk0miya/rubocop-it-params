@@ -1,18 +1,16 @@
 # Generated from lib/rubocop/prefer_it_parameter/plugin.rb with RBS::Inline
 
 module RuboCop
-  module It
-    module Params
-      class Plugin < LintRoller::Plugin
-        # @rbs override
-        def about: ...
+  module PreferItParameter
+    class Plugin < LintRoller::Plugin
+      # @rbs override
+      def about: ...
 
-        # @rbs override
-        def supported?: ...
+      # @rbs override
+      def supported?: ...
 
-        # @rbs override
-        def rules: ...
-      end
+      # @rbs override
+      def rules: ...
     end
   end
 end

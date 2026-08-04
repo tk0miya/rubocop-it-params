@@ -1,9 +1,7 @@
 # Generated from lib/rubocop/prefer_it_parameter/version.rb with RBS::Inline
 
 module RuboCop
-  module It
-    module Params
-      VERSION: ::String
-    end
+  module PreferItParameter
+    VERSION: ::String
   end
 end
