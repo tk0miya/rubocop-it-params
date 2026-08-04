@@ -18,7 +18,38 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      # `paths` also matches changes that leave the version untouched, such as a rename
+      # of the namespace, and `rake release` fails once the version is on RubyGems.
+      # RubyGems is asked rather than the git tags because `rake release` tags before it
+      # pushes the gem, so a run that failed to publish has to stay retryable.
+      - name: Check whether the version is already published
+        id: guard
+        shell: bash
+        run: |
+          version="$(sed -n 's/^ *VERSION = "\(.*\)"$/\1/p' lib/rubocop/prefer_it_parameter/version.rb)"
+          if [ -z "$version" ]; then
+            echo "::error::Could not read VERSION from lib/rubocop/prefer_it_parameter/version.rb"
+            exit 1
+          fi
+          gem_name="$(basename ./*.gemspec .gemspec)"
+          url="https://rubygems.org/api/v2/rubygems/${gem_name}/versions/${version}.json"
+          http_status="$(curl -sS --retry 3 -o /dev/null -w '%{http_code}' "$url")"
+          case "$http_status" in
+            404)
+              echo "::notice::${version} is not on RubyGems yet; releasing it."
+              echo "release=true" >> "$GITHUB_OUTPUT"
+              ;;
+            200)
+              echo "::notice::${version} is already published; skipping the release."
+              echo "release=false" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "::error::RubyGems answered ${http_status} for ${version}; cannot tell whether it is published"
+              exit 1
+              ;;
+          esac
       - name: Set up Ruby
+        if: steps.guard.outputs.release == 'true'
         uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
         with:
           ruby-version: ruby
@@ -28,6 +59,8 @@ jobs:
           # See https://docs.zizmor.sh/audits/#cache-poisoning
           bundler-cache: false
       - name: Install dependencies
+        if: steps.guard.outputs.release == 'true'
         run: bundle install
       - name: Publish to RubyGems
+        if: steps.guard.outputs.release == 'true'
         uses: rubygems/release-gem@052cc82692552de3ef2b81fd670e41d13cba8092 # v1.4.0
